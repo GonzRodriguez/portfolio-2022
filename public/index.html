@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gonzalo-Rodriguez" />
+    <meta
+      name="viewport"
+      content="width=device-width,minimum-scale=1,initial-scale=1"
+    />
+    <meta property="og:image" content="https://user-images.githubusercontent.com/47540285/176488254-f6b55a38-5493-4688-b989-958b7e1bea54.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="1024">
+    <meta name="theme-color" content="#77ffe9" />
+    <link rel="icon" type="image/x-icon" href="assets\new-logo-bg.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,500&family=Montserrat:ital,wght@0,100;0,400;1,300&family=Noto+Serif:wght@400;700&family=Raleway:wght@800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/app.css">
+    <script type="module" src="../src/router/router.js" ></script>  
+    <script type="module" src="../src/pages/index.js" ></script>
+    <title>Gonzalo Portfolio</title>
+  </head>
+  <body>
+    <router-component>
+      <route-component 
+        index="1"
+        path="/" 
+        title="Home" 
+        component="home-component">
+      </route-component>
+      <route-component
+        index="2"
+        path="/about"
+        title="About"
+        component="about-component">
+      </route-component>
+      <route-component 
+        index="3"
+        path="/experience" 
+        title="Experience" 
+        component="experience-component">
+      </route-component>
+      <route-component
+        index="4"
+        path="/projects"
+        title="Projects"
+        component="projects-component">
+      </route-component>
+      <route-component 
+        index="5"
+        path="/contact" 
+        title="Contact" 
+        component="contact-component">
+      </route-component>
+      <route-component 
+        path="*" 
+        title="404" 
+        component="not-found">
+      </route-component>
+      <outlet-component class="outlet"></outlet-component>
+    </router-component>
+    
+  </body>
+</html>

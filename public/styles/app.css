@@ -1,0 +1,204 @@
+:root {
+  --h1-text: "Raleway", sans-serif;
+  --h2-text: verdana, sans-serif;
+  --h3-text: "Raleway", sans-serif;
+  --h6-text: "DM Sans", sans-serif;
+  --p-text: "Montserrat", sans-serif;
+  --h1-size: 8.5rem;
+  --h2-size: 2rem;
+  --h3-size: 3rem;
+  --h6-size: 1.3rem;
+  --p-size: 1rem;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html, 
+body {
+  min-height: 100vh;
+  background-color: #77ffe9;
+  color:  #000;
+  background-image: url("https://www.transparenttextures.com/patterns/worn-dots.png");
+  overflow-x: hidden;
+}
+
+h1 {
+  font-family: var(--h1-text);
+  font-size: var(--h1-size);
+  font-weight: 900;
+  margin: 0;
+}
+h2 {
+  font-family: var(--h2-text);
+  font-size: var(--h2-size);
+  font-weight: 500;
+  margin: 0;
+}
+h3 {
+  font-family: var(--h3-text);
+  font-size: var(--h3-size);
+  font-weight: 800;
+  margin: 0;
+}
+h6 {
+  font-family: var(--h6-text);
+  font-size: var(--h6-size);
+  font-weight: 800;
+  margin: 0;
+}
+p {
+  font-family: var(--p-text);
+  font-size: var(--p-size);
+  font-weight: 800;
+  margin: 0;
+}
+
+
+.outlet {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content:center; 
+  align-items: center;
+  padding-bottom: 7rem;
+}
+
+nav ul li a[index="1"]{
+  background: #5b7eff;
+  border: 0;
+  border-radius: 50px;
+  border: 5px solid white;
+  color: #ffffff;
+  width: 6rem;
+  height: 6rem;
+  filter: drop-shadow(0px 7px 17px);
+  animation: float 1500ms infinite linear;
+}
+nav{
+  position: fixed;
+  left: 50%;
+  bottom: 5%;
+  transform: translateX(-50%);
+}
+nav ul {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 3.5rem;
+  list-style: none;
+}
+nav ul li :not([index="1"]) {
+  box-shadow: -1px 6px 12px 2px #00000036;
+}
+nav ul li a{
+  border-radius: 20px;
+  background: #ffffff;
+  font-family: var(--h6-text);
+  font-weight: 600;
+  width: 7rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  /* color: white; */
+}
+nav ul li a:active{
+  color: #7593ff;
+}
+
+.leave-left {
+  transform: translateX(-100%);
+  /* transform-origin: left top; */
+  transition: 500ms ease-in-out;
+}
+.enter-from-left {
+  position: absolute;
+  top: 0;
+  animation: enter-left 500ms;
+}
+.leave-right {
+  transform: translateX(100%);
+  /* transform-origin: right top; */
+  transition: 500ms ease-in-out;
+}
+.enter-from-right {
+  position: absolute;
+  top: 0;
+  animation: enter-right 500ms
+}
+
+.show-nav {
+  animation: show-nav 1s cubic-bezier(0.43, 0.93, 0.99, 1.2);
+}
+.hide-nav {
+  animation: hide-nav 1s cubic-bezier(0.43, 0.93, 0.99, 1.2);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(20px)
+  }
+  50% {
+    transform: translateY(0px)
+  }
+  100% {
+    transform: translateY(20px)
+  }
+} 
+@keyframes enter-right {
+  from {
+    transform: translateX(-100%)
+  }
+  to {
+    transform: translateX(0%)
+  }
+} 
+@keyframes enter-left {
+ from {
+    left: 100%;
+ }
+ to {
+    left: 5%;
+ }
+}
+@keyframes show-nav {
+ from {
+    bottom: -100%;
+ }
+ to {
+    bottom: 5%;
+ }
+}
+@keyframes hide-nav {
+ from {
+    bottom: 5%;
+ }
+ to {
+    bottom: -100%;
+ }
+}
+
+@media (max-width: 900px) {
+  :root {
+    
+    --h1-size: 3.5rem;
+    --h2-size: 1.5rem;
+    --h6-size: 1.2rem;
+  }
+  nav ul {
+    gap: 1.3rem;
+  }
+  nav ul li a {
+    width: 4.5rem;
+    height: 3rem;
+    font-size: x-small;
+  }
+}

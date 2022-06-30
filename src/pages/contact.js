@@ -15,7 +15,51 @@ export default class Contact extends HTMLElement {
   connectedCallback() {
 
     const style = document.createElement("style");
-    style.innerHTML = `
+
+    
+    this.innerHTML = `
+      <div class="page">
+        <h1>Contact Me</h1>
+        <form method="POST" action="http://localhost:3000/api/contact" id="contact-form">
+          <input type="text" placeholder="Name"/>
+          <input type="text" placeholder="Company"/>
+          <input type="email" placeholder="Email"/>
+          <textarea type="text" placeholder="Message..." rows="4"></textarea>
+          <input id="submit" type="submit" value="SEND"/>
+          <input id="goHome" type="button" value= "Back to Home Page" />
+        </form>
+      </div>
+    `;
+    document.getElementById("goHome").onclick = this.goHome;
+    document.querySelector("form").addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const [name, company, email, message, ...buttons] = e.target;
+
+      const body = {
+        company: company.value,
+        name: name.value,
+        email: email.value,
+        message: message.value,
+      };
+      const options = {
+        method: "POST",
+        mode: "cors",
+        port: "3000",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      };
+      try {
+        const response = await fetch("http://localhost:3000/api/contact", options);
+        const data = await response.json();
+        this.alert(data, response.status);
+      } catch (err) {
+        console.error(err);
+      }
+      e.target.reset()
+    })
+        style.innerHTML = `
       contact-component:defined {
         display: flex;
         justify-content: center;
@@ -69,8 +113,9 @@ export default class Contact extends HTMLElement {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        padding-inline: 3rem;
-        height: 50px;
+        padding: 1rem 5rem;
+        min-height: 50px;
+        width: fit-content;
         margin-inline: 2rem;
         border-radius: 20px;
         display: flex;
@@ -104,56 +149,13 @@ export default class Contact extends HTMLElement {
           top: -5%;
         }
       }
-      @media (max-width: 900px) {
+        @media (max-width: 900px) {
         input,
         textarea {
           border: 3px solid black;
         }
       }
     `;
-    
-    this.innerHTML = `
-      <div class="page">
-        <h1>Contact Me</h1>
-        <form method="POST" action="http://localhost:3000/api/contact" id="contact-form">
-          <input type="text" placeholder="Name"/>
-          <input type="text" placeholder="Company"/>
-          <input type="email" placeholder="Email"/>
-          <textarea type="text" placeholder="Message..." rows="4"></textarea>
-          <input id="submit" type="submit" value="SEND"/>
-          <input id="goHome" type="button" value= "Go Home" />
-        </form>
-      </div>
-    `;
-    document.getElementById("goHome").onclick = this.goHome;
-    document.querySelector("form").addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const [name, company, email, message, ...buttons] = e.target;
-
-      const body = {
-        company: company.value,
-        name: name.value,
-        email: email.value,
-        message: message.value,
-      };
-      const options = {
-        method: "POST",
-        mode: "cors",
-        port: "3000",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(body),
-      };
-      try {
-        const response = await fetch("http://localhost:3000/api/contact", options);
-        const data = await response.json();
-        this.alert(data, response.status);
-      } catch (err) {
-        console.error(err);
-      }
-      e.target.reset()
-    })
     this.appendChild(style);
   }
 }

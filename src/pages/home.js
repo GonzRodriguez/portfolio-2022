@@ -19,7 +19,6 @@ export default class Home extends HTMLElement {
         gap: 0.7rem;
         padding: 5rem;
         width: 100%;
-        margin: 10rem 5rem;
         align-items: center;
         justify-content: center;
       }
@@ -29,6 +28,9 @@ export default class Home extends HTMLElement {
         justify-content: center;
         max-width: 1500px;
         gap: 0.7rem;
+      }
+      .home-hero-title{
+        max-width: 1000px;
       }
       span.skill {
         font-size:.7rem;
@@ -49,7 +51,7 @@ export default class Home extends HTMLElement {
         width: 150px;
         padding: 1rem;
         border: 5px solid black;
-        border-radius: 10px;
+        border-radius: .8rem;
         color: white;
         background-color: hsl(0, 100%, 68%);
         font-family: var(--h6-text);
@@ -62,7 +64,7 @@ export default class Home extends HTMLElement {
         animation: hue 1500ms infinite;
       }
       img.home-hero-img {
-        width: 500px;
+        width: 20rem;
         margin: 2rem;
       }
 
@@ -78,8 +80,14 @@ export default class Home extends HTMLElement {
         home-component:defined{
           margin:0;
         }
+
+      }
+      @media (max-width: 700px) {
+        home-component:defined{
+          padding: 1rem;
+        }
         img.home-hero-img {
-          width: 300px;
+          width: 13rem;
           margin: 2rem;
         }
       }
@@ -93,7 +101,7 @@ export default class Home extends HTMLElement {
       </picture>
     </figure>
     <div class="home-hero-container">
-      <h1> ${cv.personal.title} </h1>
+      <h1 class="home-hero-title"> ${cv.personal.title} </h1>
       <h2><em>${cv.personal.name} </em></h2>
       <p>${cv.personal.tools}</p>
       <p>${cv.personal.occupation}</p>

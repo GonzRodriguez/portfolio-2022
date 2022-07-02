@@ -25,7 +25,6 @@ export default class Router extends HTMLElement {
   constructor() {
     super();
     this.setAttribute("root", this.root);
-    console.log("construct")
     const nav = document.createElement("nav");
     this.nav = nav;
     this.appendChild(nav);
@@ -52,7 +51,6 @@ export default class Router extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log("Router element is rendered");
     this.updateLinks();
     this.navigate(this.root);
     const root = this.getAttribute("root");
@@ -69,7 +67,6 @@ export default class Router extends HTMLElement {
 
   _handlePopstate = () => {
     this.navigate(window.location.pathname);
-    console.log(PopStateEvent.state);
   };
   static get observedAttributes() {
     return ["root"];

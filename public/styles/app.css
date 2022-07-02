@@ -101,6 +101,7 @@ nav ul li a{
   background: #ffffff;
   font-family: var(--h6-text);
   font-weight: 600;
+  font-size: small;
   width: 7rem;
   height: 4rem;
   display: flex;
@@ -162,12 +163,12 @@ nav ul li a:active{
   }
 } 
 @keyframes enter-left {
- from {
-    left: 100%;
- }
- to {
-    left: 5%;
- }
+  from {
+    transform: translateX(100%)
+  }
+  to {
+    transform: translateX(0%)
+  }
 }
 @keyframes show-nav {
  from {

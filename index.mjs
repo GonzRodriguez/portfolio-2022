@@ -2,7 +2,8 @@ import "dotenv/config";
 import express from "express";
 const app = express();
 import fetch from "node-fetch";
-// import cors from "cors";
+import cors from "cors";
+import helmet from "helmet";
 import path from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
@@ -22,11 +23,21 @@ const limiter = rateLimit({
   legacyHeaders: false, 
 });
 
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      "script-src": ["'self'", "*.github.com"],
+      "connect-src": ["'self'", "*.github.com"],
+      "style-src": ["'self'", "'report-sample'"],
+      "worker": ["'none'"],
+    },
+  })
+);
 app.set("trust proxy", 2);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// app.use(cors());
+app.use(cors());
 
 app.use("/", express.static(path.join(__dirname, "public")));
 app.use("/src/router", express.static(path.join(__dirname, "src/router")));
@@ -45,7 +56,12 @@ app.use((req, res, next) => {
   );
   next();
 });
+app.use(function(req, res, next) {
 
+  res.setHeader("content-security-policy-report-only", "default-src 'self'; script-src 'report-sample' 'self'; style-src 'report-sample' 'self'; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self'; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; report-uri https://62bff9ff9bc141b6c5371965.endpoint.csper.io/?v=1; worker-src 'none';")
+  next();
+}
+);
 
   app.post("/api/contact", limiter, async (req, res) => {
     const { name, company, email, message } = req.body;
@@ -65,7 +81,7 @@ app.use((req, res, next) => {
     body.personalizations[0].subject = `${name} from ${company} has sent you a message through your portfolio.`;
     body.from = { email: email };
     body.content = [{ type: "text/plain", value: message || "no message" }];
-    console.log(JSON.stringify(body));
+    console.log(req.body);
     const options = {
       method: "POST",
       headers: {

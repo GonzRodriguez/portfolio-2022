@@ -1,0 +1,34 @@
+      experience-component:defined {
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        flex-direction:column;
+        margin: 5rem ;
+        padding-inline: 1rem;
+        width: 100%;
+      }
+      section.experience-section  {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem; 
+        margin-block-start: 2rem;
+      }
+      div.experience-page{
+        width: 100%;
+      }
+      div.experience-card  {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem; 
+        margin-inline: 1rem;
+        max-width: 900px;
+      }
+      @media (max-width: 900px) {
+        experience-component:defined{
+          margin: 4rem 0 0
+        }
+      
+        .experience-card {
+          margin-inline-start: 1rem;
+        }
+      }

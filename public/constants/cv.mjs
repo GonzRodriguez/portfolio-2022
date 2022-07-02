@@ -47,7 +47,7 @@ export const cv = {
         period: "2009 to 2010",
       },
     ],
-    certifications: [
+    certificates: [
       {
         title: "Unit Testing for Typescript & NodeJs Developers with Jest",
         year: " 2021",

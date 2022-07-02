@@ -3,9 +3,16 @@ import { cv } from "/constants/cv.mjs";
 export default class About extends HTMLElement {
 
   connectedCallback() {
-    const style = document.createElement("style");
+    const link = document.createElement("link");
     const icons = document.createElement("section");
     const quotes = document.createElement("section");
+    this.toggleAttribute("hidden");
+    link.setAttribute("rel", "stylesheet");
+    link.setAttribute("type", "text/css");
+    link.setAttribute("href", "/styles/about.css");
+    link.setAttribute("id", "about-css");
+
+
     quotes.className = "about-quotes";
     icons.className = "about-icons";
     const grid = document.createElement("div");
@@ -56,83 +63,16 @@ export default class About extends HTMLElement {
         </section>
       </div>
     `;
-    style.innerHTML = `
-      about-component:defined {
-        display: flex;
-        justify-content:center;
-        align-items: center;
-        flex-direction:column;
-        margin: 5rem ;
-        padding-inline: 2rem;
-        width: 100%;
-      }
-      section.about-info  {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        max-width: 800px;
-        margin-inline-start: 2rem;
-        margin-block-start: 2rem;
-      }
-      .about-quotes article {
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-        max-width: 800px;
-        margin: 5rem 0;
-      }
-      .about-quotes span {
-        font-size: 4.8rem;
-        max-height: 2.5rem;
-      }
-      .about-quotes h2,
-      .about-quotes h6{
-        display:block;
-        text-align: end;
-        font-weight: bolder;
-      }
-
-      .about-quotes p{
-        margin-left: 2rem;
-      }
-      .about-icons {
-        margin: 3rem 0;
-      }
-      .about-icons-grid  {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-      }
-      .about-icons-grid img {
-        width: 40px;
-        height: 40px;
-      }
-      .about-icons-grid div {
-        width: 40px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      .about-icons-grid label {
-        font-family: var(--p-text);
-      }
 
 
-      @media (max-width: 900px) {
-        about-component:defined{
-          margin: 4rem 0 0
-        }
-        section.about-info  {
-        margin-inline-start: .5rem;
-      }
-    }`;
-
-    this.appendChild(icons);
-    this.appendChild(quotes);
-    this.appendChild(style);
+    
+    this.appendChild(link);
+    const aboutCSS = document.querySelector("#about-css");
+    aboutCSS.onload = function () {
+      this.parentNode.toggleAttribute("hidden");
+      this.parentNode.appendChild(icons);
+      this.parentNode.appendChild(quotes);
+    };
   }
 }
 

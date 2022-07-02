@@ -2,59 +2,43 @@ import {cv} from '/constants/cv.mjs'
 export default class Experience extends HTMLElement {
   connectedCallback() {
     
-    const style = document.createElement("style");
-    style.innerHTML = `
-      experience-component:defined {
-        display: flex;
-        justify-content:center;
-        align-items: center;
-        flex-direction:column;
-        margin: 5rem ;
-        padding-inline: 2rem;
-        width: 100%;
-      }
-      section.experience-section  {
-        display: flex;
-        flex-direction: column;
-        gap: 1.1rem; 
-        margin-block-start: 2rem;
-      }
-      div.experience-card  {
-        display: flex;
-        flex-direction: column;
-        gap: .5rem; 
-        margin-inline-start: 2rem;
-        max-width: 900px;
-      }
-      @media (max-width: 900px) {
-        experience-component:defined{
-          margin: 4rem 0 0
-        }
-      
-        .experience-card {
-          margin-inline-start: 1rem;
-        }
-      }
-    `;
     const page = document.createElement('div');
+    const link = document.createElement("link");
+
     page.classList.add(".experience-page")
-    this.appendChild(style);
+
+    this.toggleAttribute("hidden");
+
+    link.setAttribute("rel", "stylesheet");
+    link.setAttribute("type", "text/css");
+    link.setAttribute("href", "/styles/experience.css");
+    link.setAttribute("id", "experience-css");
+
+    this.appendChild(link);
     this.appendChild(page);
+
+    const experienceCSS = document.querySelector("#experience-css");
+    experienceCSS.onload = function () {
+      this.parentNode.toggleAttribute("hidden");
+    };
 
     const experience = document.createElement("section");
     const education = document.createElement("section");
-    const certifications = document.createElement("section");
+    const certificates = document.createElement("section");
     
     const sections = [
       {
-        component: experience, title: "Work Experience"
+        component: experience,
+        title: "Work Experience",
       },
       {
-       component: education, title: "Education"
+        component: education,
+        title: "Education",
       },
       {
-         component: certifications, title:"Certifications"
-      }
+        component: certificates,
+        title: "Certificates",
+      },
     ];
     sections.forEach(sec => {
       const h1 = document.createElement("h1");
@@ -82,7 +66,7 @@ export default class Experience extends HTMLElement {
       `;
       education.appendChild(card)
     })
-    cv.experience.certifications.forEach((item) => {
+    cv.experience.certificates.forEach((item) => {
       const card = document.createElement("div");
       card.classList.add("experience-card");
       card.innerHTML = `
@@ -90,14 +74,16 @@ export default class Experience extends HTMLElement {
       <h6>${item.academy}</h6>
       <p>year: ${item.year}</p>
       `;
-      certifications.appendChild(card);
+      certificates.appendChild(card);
     });
     page.appendChild(experience);
     page.appendChild(education);
-    page.appendChild(certifications);
+    page.appendChild(certificates);
     page
       .querySelectorAll("section")
       .forEach((s) => s.classList.add("experience-section"));
+
+
   }
 }
 
